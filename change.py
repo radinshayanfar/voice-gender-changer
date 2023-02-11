@@ -37,7 +37,7 @@ def detect_gender(f0):
     Works based on the fact that an adult woman's average pitch range is from 165 to 255 Hz and a man's is 85 to 155 Hz.
     """
 
-    return "woman" if f0[~np.isnan(f0)].mean() > 160 else "man"
+    return "female" if f0[~np.isnan(f0)].mean() > 160 else "male"
 
 
 def shift_pitch(sig, sr, f0, gender, kernel_size=11):
@@ -45,7 +45,7 @@ def shift_pitch(sig, sr, f0, gender, kernel_size=11):
     Shifts signal pitch by one octave based on the gender.
     """
 
-    if gender == "woman":
+    if gender == "female":
         shifted_f0 = f0 / 2
     else:
         shifted_f0 = f0 * 2
@@ -63,8 +63,9 @@ def shift_pitch(sig, sr, f0, gender, kernel_size=11):
 if __name__ == '__main__':
     # Parsing the command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('input', help='input file relative file')
     parser.add_argument('-o', '--output', default='output.mp3', help='output file relative path')
+    parser.add_argument('-g', '--gender', default=None, choices=['male', 'female'], help='input file utterance gender - empty to detect gender automatically')
+    parser.add_argument('input', help='input file rlative file')
     args = parser.parse_args()
 
     # Loading audio
@@ -79,7 +80,7 @@ if __name__ == '__main__':
                             fmax=fmax)
 
     # Pitch shifting
-    gender = detect_gender(f0)
+    gender = args.gender if args.gender else detect_gender(f0)
     shifted_audio = shift_pitch(sig, sr, f0, gender)
 
     # Writing the output file
