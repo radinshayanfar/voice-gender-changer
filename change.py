@@ -10,8 +10,7 @@ import numpy as np
 
 
 # Set some basis parameters
-frame_length = 2048
-hop_length = frame_length // 4
+frame_length = 1024
 fmin = librosa.note_to_hz('C2')
 fmax = librosa.note_to_hz('D4')
 
@@ -74,7 +73,6 @@ if __name__ == '__main__':
     # Pitch tracking using the PYIN algorithm.
     f0, _, _ = librosa.pyin(sig,
                             frame_length=frame_length,
-                            hop_length=hop_length,
                             sr=sr,
                             fmin=fmin,
                             fmax=fmax)
