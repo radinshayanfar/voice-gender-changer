@@ -37,3 +37,4 @@ For example, to change the gender of the sample file at `./samples/man-3000-1566
 $ python change.py -o woman.mp3 './samples/man-3000-15664-0009.flac'
 ```
 
+Sample files available at the [`samples`](./samples) directory are from [LibriSpeech](http://www.openslr.org/12) ASR corpus.
