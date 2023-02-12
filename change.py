@@ -65,7 +65,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output', default='output.mp3', help='output file relative path')
     parser.add_argument('-g', '--gender', default=None, choices=['male', 'female'], help='input file utterance gender - empty to detect gender automatically')
-    parser.add_argument('input', help='input file rlative file')
+    parser.add_argument('input', help='input file rlative path')
     args = parser.parse_args()
 
     # Loading audio
